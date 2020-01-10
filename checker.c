@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/09 17:43:44 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/10 14:25:29 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,33 @@ int	check_error(int argc, char **argv)
 	return (0);
 }
 
-int	*create_array(int argc, char **argv)
+int	create_stacks(int argc, char **argv, int **ab)
 {
 	int i;
-	int *arr;
 
-	if (!(arr = (int *)malloc(sizeof(int) * (argc - 1))))
-		return (NULL);
+	if (!(ab[0] = (int*)ft_memalloc(sizeof(int) * (argc - 1))))
+		return (1);
+	if (!(ab[1] = (int*)ft_memalloc(sizeof(int) * (argc - 1))))
+		return (1);
+	if (!(ab[2] = (int*)ft_memalloc(sizeof(int))))
+		return (1);
+	if (!(ab[3] = (int*)ft_memalloc(sizeof(int))))
+		return (1);
+	ab[2][0] = argc - 1;
+	ab[3][0] = 0;
 	i = 0;
 	while (argc > ++i)
-		arr[i - 1] = ft_atoi(argv[i]);
-	return (arr);
+		ab[0][i - 1] = ft_atoi(argv[i]);
+	return (0);
 }
 
-int	check_order(int size, int *arr)
+int	check_order(int **ab)
 {
-	while (--size > 0)
-		if (arr[size] < arr[size - 1])
+	int i;
+
+	i = 0;
+	while (*ab[2] > ++i)
+		if (ab[0][i - 1] > ab[0][i])
 			return (0);
 	return (1);
 }
@@ -97,27 +107,27 @@ int	check_input(char *input)
 	return (0);
 }
 
-int	handle_input(int size, int *a, char *input)
+int	handle_input(int **ab, char *input)
 {
-	(void)size;
-	(void)a;
+	(void)ab;
 	(void)input;
 	if (!check_input(input))
 		return (1);
+	//handle_operation(
 	return (0);
 }
 
-int	handle_sorting(int size, int *a)
+//void	handle_operation()
+
+int	handle_sorting(int **ab)
 {
 	char *input;
 
-	(void)size;
-	(void)a;
 	while (1)
 	{
 		if (get_next_line(0, &input) == 0)
 			break;
-		if (handle_input(size, a, input))
+		if (handle_input(ab, input))
 			return (0);
 	}
 	return (1);
@@ -125,17 +135,18 @@ int	handle_sorting(int size, int *a)
 
 int	main(int argc, char **argv)
 {
-	int *a;
+	int *ab[4];
 
 	if (check_error(argc, argv))
 	{
 		write(2, "Error\n", 6);
 		return (1);
-	}	
-	a = create_array(argc, argv);
-	if (handle_sorting(argc - 1, a))
+	}
+	if (create_stacks(argc, argv, ab))
+		return (1);
+	if (handle_sorting(ab))
 	{
-		if (check_order(argc - 1, a))
+		if (check_order(ab))
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
