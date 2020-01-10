@@ -6,13 +6,14 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/10 14:25:29 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/10 16:56:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft/ft_printf.h"
 #include "libft/get_next_line.h"
+#include "checker.h"
 
 int	check_array_int(int argc, char **argv)
 {
@@ -20,6 +21,8 @@ int	check_array_int(int argc, char **argv)
 	int j;
 
 	i = 0;
+	if (ft_strequ(argv[1], "-v"))
+		i++;
 	while (argc > ++i)
 	{
 		j = 0;
@@ -43,6 +46,8 @@ int	check_duplicate(int argc, char **argv)
 	int j;
 
 	j = 0;
+	if (ft_strequ(argv[1], "-v"))
+		j++;
 	while (argc > ++j)
 	{
 		i = j;
@@ -68,6 +73,9 @@ int	create_stacks(int argc, char **argv, int **ab)
 {
 	int i;
 
+	i = 0;
+	if (ft_strequ(argv[1], "-v"))
+		argc--;
 	if (!(ab[0] = (int*)ft_memalloc(sizeof(int) * (argc - 1))))
 		return (1);
 	if (!(ab[1] = (int*)ft_memalloc(sizeof(int) * (argc - 1))))
@@ -78,9 +86,8 @@ int	create_stacks(int argc, char **argv, int **ab)
 		return (1);
 	ab[2][0] = argc - 1;
 	ab[3][0] = 0;
-	i = 0;
 	while (argc > ++i)
-		ab[0][i - 1] = ft_atoi(argv[i]);
+		ab[0][i - 1] = ft_atoi(argv[i + (ft_strequ(argv[1], "-v"))]);
 	return (0);
 }
 
@@ -89,6 +96,8 @@ int	check_order(int **ab)
 	int i;
 
 	i = 0;
+	if (*ab[3])
+		return (0);
 	while (*ab[2] > ++i)
 		if (ab[0][i - 1] > ab[0][i])
 			return (0);
@@ -107,27 +116,70 @@ int	check_input(char *input)
 	return (0);
 }
 
-int	handle_input(int **ab, char *input)
+void	handle_operation(int **ab, char *input)
 {
-	(void)ab;
-	(void)input;
+	if (ft_strequ(input, "sa"))
+		handle_sa(&ab);
+	if (ft_strequ(input, "sb"))
+		handle_sb(&ab);
+	if (ft_strequ(input, "ss"))
+		handle_ss(&ab);
+	if (ft_strequ(input, "pa"))
+		handle_pa(&ab);
+	if (ft_strequ(input, "pb"))
+		handle_pb(&ab);
+	if (ft_strequ(input, "ra"))
+		handle_ra(&ab);
+	if (ft_strequ(input, "rb"))
+		handle_rb(&ab);
+	if (ft_strequ(input, "rr"))
+		handle_rr(&ab);
+	if (ft_strequ(input, "rra"))
+		handle_rra(&ab);
+	if (ft_strequ(input, "rrb"))
+		handle_rrb(&ab);
+	if (ft_strequ(input, "rrr"))
+		handle_rrr(&ab);
+}
+
+void	debug_print(int **ab)
+{
+	int i;
+
+	i = 0;
+	ft_printf("%sStack a:    %sStack b:\n", "\x1B[31m", "\x1B[32m");
+	while (*ab[2] > i || *ab[3] > i)
+	{
+		if (*ab[2] > i)
+			ft_printf("%s%-8d  ", "\x1B[31m", ab[0][i]);
+		else
+			ft_printf("          ");
+		if (*ab[3] > i)
+			ft_printf("%s  %d", "\x1B[32m", ab[1][i]);
+		ft_putendl("");
+		i++;
+	}
+}
+
+int	handle_input(int **ab, char *input, int debug_mode)
+{
 	if (!check_input(input))
 		return (1);
-	//handle_operation(
+	handle_operation(ab, input);
+	if (debug_mode)
+		debug_print(ab);
 	return (0);
 }
 
-//void	handle_operation()
-
-int	handle_sorting(int **ab)
+int	handle_sorting(int **ab, int debug_mode)
 {
 	char *input;
 
 	while (1)
 	{
 		if (get_next_line(0, &input) == 0)
-			break;
-		if (handle_input(ab, input))
+			break ;
+		if (handle_input(ab, input, debug_mode))
 			return (0);
 	}
 	return (1);
@@ -137,6 +189,8 @@ int	main(int argc, char **argv)
 {
 	int *ab[4];
 
+	if (argc == 1 || (argc == 2 && ft_strequ(argv[1], "-v")))
+		return (0);
 	if (check_error(argc, argv))
 	{
 		write(2, "Error\n", 6);
@@ -144,7 +198,9 @@ int	main(int argc, char **argv)
 	}
 	if (create_stacks(argc, argv, ab))
 		return (1);
-	if (handle_sorting(ab))
+	if (ft_strequ(argv[1], "-v"))
+		debug_print(ab);
+	if (handle_sorting(ab, ft_strequ(argv[1], "-v")))
 	{
 		if (check_order(ab))
 			write(1, "OK\n", 3);
