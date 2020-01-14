@@ -6,12 +6,12 @@
 #    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 12:10:11 by sadawi            #+#    #+#              #
-#    Updated: 2020/01/08 15:51:56 by sadawi           ###   ########.fr        #
+#    Updated: 2020/01/13 16:48:45 by sadawi           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME=checker
-SRCS=*.c
+SRCS=checker.c handle_operations.c
 OBJS=*.o
 FLAGS=-Wall -Wextra -Werror
 RUN_LIB=make -C libft/ fclean && make -C libft/

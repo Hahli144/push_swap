@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 12:32:47 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/08 18:15:34 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/14 17:26:01 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ long	ft_atoilong(const char *str)
 	i = 0;
 	result = 0;
 	flag = 1;
+	while (str[i] == ' ' || (8 < str[i] && str[i] < 14))
+		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
