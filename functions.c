@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/14 18:41:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/15 15:10:14 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,27 @@ int	check_array_int(int argc, char **argv)
 	return (1);
 }
 
-int	check_duplicate(int argc, char **argv)
+int	check_duplicate(int **ab)
 {
 	int i;
 	int j;
 
 	j = 0;
-	if (ft_strequ(argv[1], "-v"))
-		j++;
-	while (argc > ++j)
+	while (*ab[2] > j)
 	{
 		i = j;
-		while (argc > ++i)
-			if (ft_atoi(argv[j]) == ft_atoi(argv[i]))
+		while (*ab[2] > ++i)
+			if (ab[0][j] == ab[0][i])
 				return (1);
+		j++;
 	}
 	return (0);
+}
+
+int	handle_error(void)
+{
+	write(2, "Error\n", 6);
+	return (1);
 }
 
 int	check_error(int argc, char **argv)
@@ -101,30 +106,83 @@ int	check_error(int argc, char **argv)
 		return (1);
 	if (!check_array_int(argc, argv))
 		return (1);
-	if (check_duplicate(argc, argv))
-		return (1);
 	return (0);
+}
+
+int	count_arguments(int argc, char **argv)
+{
+	int i;
+	int j;
+	int total;
+
+	i = 0;
+	total = 0;
+	if (ft_strequ(argv[1], "-v"))
+		i++;
+	while (argc > ++i)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			while (argv[i][j] == ' ')
+				j++;
+			if (argv[i][j] == '-')
+				j++;
+			if (ft_isdigit(argv[i][j]))
+				total++;
+			while (ft_isdigit(argv[i][j]))
+				j++;
+		}
+	}
+	return (total);
+}
+
+void	store_string_ints(int argc, char **argv, int **ab)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	k = 0;
+	if (ft_strequ(argv[1], "-v"))
+		i++;
+	while (argc > ++i)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			ab[0][k++] = ft_atoi(&argv[i][j]);
+			while (argv[i][j] == ' ')
+				j++;
+			if (argv[i][j] == '-')
+				j++;
+			while (ft_isdigit(argv[i][j]))
+				j++;
+			while (argv[i][j] == ' ')
+				j++;
+		}
+	}
 }
 
 int	create_stacks(int argc, char **argv, int **ab)
 {
 	int i;
+	int size;
 
 	i = 0;
-	if (ft_strequ(argv[1], "-v"))
-		argc--;
-	if (!(ab[0] = (int*)ft_memalloc(sizeof(int) * (argc - 1))))
+	size = count_arguments(argc, argv);
+	if (!(ab[0] = (int*)ft_memalloc(sizeof(int) * size)))
 		return (1);
-	if (!(ab[1] = (int*)ft_memalloc(sizeof(int) * (argc - 1))))
+	if (!(ab[1] = (int*)ft_memalloc(sizeof(int) * size)))
 		return (1);
 	if (!(ab[2] = (int*)ft_memalloc(sizeof(int))))
 		return (1);
 	if (!(ab[3] = (int*)ft_memalloc(sizeof(int))))
 		return (1);
-	ab[2][0] = argc - 1;
+	ab[2][0] = size;
 	ab[3][0] = 0;
-	while (argc > ++i)
-		ab[0][i - 1] = ft_atoi(argv[i + (ft_strequ(argv[1], "-v"))]);
+	store_string_ints(argc, argv, ab);
 	return (0);
 }
 
@@ -222,5 +280,5 @@ int	handle_sorting(int **ab, int debug_mode)
 	return (1);
 }
 
+// create stacks from strings containing multiple integers
 // check if array is sorted in between moves
-//create stacks from strings containing multiple integers

@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/13 16:33:53 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/15 14:40:05 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	handle_rrr(int ***ab);
 
 int		check_array_int(int argc, char **argv);
 
-int		check_duplicate(int argc, char **argv);
+int		check_duplicate(int **ab);
 
 int		check_error(int argc, char **argv);
 
@@ -54,5 +54,7 @@ void	debug_print(int **ab);
 int		handle_input(int **ab, char *input, int debug_mode);
 
 int		handle_sorting(int **ab, int debug_mode);
+
+int		handle_error(void);
 
 #endif
