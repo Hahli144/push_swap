@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/15 15:10:14 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/15 18:51:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,3 +282,4 @@ int	handle_sorting(int **ab, int debug_mode)
 
 // create stacks from strings containing multiple integers
 // check if array is sorted in between moves
+// works perfectly with "-v" flag
