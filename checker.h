@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/15 14:40:05 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/16 16:31:17 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		check_order(int **ab);
 
 int		check_input(char *input);
 
-void	handle_operation(int **ab, char *input);
+int		handle_operation(int **ab, char *input);
 
 void	debug_print(int **ab);
 
@@ -56,5 +56,11 @@ int		handle_input(int **ab, char *input, int debug_mode);
 int		handle_sorting(int **ab, int debug_mode);
 
 int		handle_error(void);
+
+int		smaller_than_stack(int n, int **ab, int stack);
+
+int		bigger_than_stack(int n, int **ab, int stack);
+
+int		check_if_b_moves(int **ab);
 
 #endif

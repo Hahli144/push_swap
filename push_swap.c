@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/15 18:43:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/16 19:30:54 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,41 @@ void	group_number_to_top(int **ab, int group, int group_amount)
 	//ft_printf("first: %d, last: %d, group: %d\n", first, last, group); //debug
 	if (*ab[2] - last + 1 <= first)
 		while (++last <= *ab[2])
-			operation_print(ab, "rra");
+		{
+			if (check_if_b_moves(ab) < 0)
+				operation_print(ab, "rrr");
+			else
+				operation_print(ab, "rra");
+		}
 	else
 		while (first--)
-			operation_print(ab, "ra");
+		{
+			if (check_if_b_moves(ab) > 0)
+				operation_print(ab, "rr");
+			else
+				operation_print(ab, "ra");
+		}
+}
+
+int		check_if_b_moves(int **ab)
+{
+	int biggest;
+	int i;
+
+	i = 0;
+	biggest = 0;
+	if (!smaller_than_stack(ab[0][0], ab, 1)
+		&& !bigger_than_stack(ab[0][0], ab, 1))
+		return (0);
+	while (*ab[3] > ++i)
+	{
+		if (ab[1][i] > ab[1][biggest])
+			biggest = i;
+	}
+	if (biggest <= *ab[3] / 2)
+		return (biggest);
+	else
+		return ((*ab[3] - biggest) * -1);
 }
 
 void	smallest_to_top(int **ab, int stack)
@@ -199,34 +230,134 @@ int	smallest_bigger_than(int n, int **ab, int stack)
 void	rotate_stack_b(int **ab)
 {
 	int i;
-	int index;
+	//int index;
 
 	i = 0;
 	if (smaller_than_stack(ab[0][0], ab, 1)
 		|| bigger_than_stack(ab[0][0], ab, 1))
 	{
-		smallest_to_top(ab, 1);
+		biggest_to_top(ab, 1);
 		return ;
-	}	
-	index = smallest_bigger_than(ab[0][0], ab, 1);
-	index_to_top(index, ab, 1);
+	}
+	//index = smallest_bigger_than(ab[0][0], ab, 1);
+	//index_to_top(index, ab, 1);
 }
 
-void	sort_stack(int **ab)
+void	debug_print_wait(int **ab)
+{
+	debug_print(ab);
+	read(0, NULL, 1);
+}
+
+void	sort_stack_small(int **ab, int debug_mode)
+{
+	int i;
+
+	i = 0;
+	if (check_order(ab))
+		return ;
+	if (debug_mode)
+		debug_print_wait(ab);
+	while (!bigger_than_stack(ab[0][i], ab, 0))
+		i++;
+	if (i == 0)
+	{
+		operation_print(ab, "ra");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	if (i == 1)
+	{
+		operation_print(ab, "rra");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	if (!check_order(ab))
+	{
+		operation_print(ab, "sa");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+}
+
+void	sort_stack_medium(int **ab, int debug_mode)
+{
+	int i;
+
+	i = 0;
+	if (check_order(ab))
+		return ;
+	if (debug_mode)
+		debug_print_wait(ab);
+	while (*ab[2] > 3)
+	{
+		operation_print(ab, "pb");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	while (!bigger_than_stack(ab[0][i], ab, 0))
+		i++;
+	if (i == 0)
+	{
+		operation_print(ab, "ra");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	if (i == 1)
+	{
+		operation_print(ab, "rra");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	if (!check_order(ab))
+	{
+		operation_print(ab, "sa");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	if (*ab[3] == 1)
+	{
+		operation_print(ab, "pa");
+		if (debug_mode)
+			debug_print_wait(ab);
+		operation_print(ab, "ra");
+		if (debug_mode)
+			debug_print_wait(ab);
+	}
+	//if (ab[1][0] < ab[1][1]
+}
+
+void	sort_stack_groups(int **ab, int debug_mode)
 {
 	int group;
+	int group_amount;
 
+	if (*ab[2] < 300)
+		group_amount = 5;
+	else
+		group_amount = 11;
+	if (check_order(ab))
+		return ;
 	//ft_putnbr(check_number_group(ab[0][0], ab, 5));
 	group = 0;
+	if (debug_mode)
+		debug_print_wait(ab);
 	while (*ab[2])
 	{
-		while (stack_contains_group(ab, 0, group, 5))
+		while (stack_contains_group(ab, 0, group, group_amount))
 		{
-			group_number_to_top(ab, group, 5);
-			if (stack_contains_group(ab, 1, group, 5))
+			group_number_to_top(ab, group, group_amount);
+			//ft_putnbr(check_if_b_moves(ab));
+			//if (stack_contains_group(ab, 1, group, 5))
 				rotate_stack_b(ab);
+			//else
+				//smallest_to_top(ab, 1);
 			//ft_printf("%d\n", ab[0][0]); // debug
 			operation_print(ab, "pb");
+			//if (ab[1][0] < ab[1][1])
+				//operation_print(ab, "sb");
+			if (debug_mode)
+				debug_print_wait(ab);
 		}
 		group++;
 	}
@@ -234,6 +365,8 @@ void	sort_stack(int **ab)
 	{
 		biggest_to_top(ab, 1);
 		operation_print(ab, "pa");
+		if (debug_mode)
+			debug_print_wait(ab);
 	}
 	//debug_print(ab); //debug
 }
@@ -250,10 +383,13 @@ int	main(int argc, char **argv)
 		return (1);
 	if (check_duplicate(ab))
 		return (handle_error());
-	sort_stack(ab);
+	if (*ab[2] < 4)
+		sort_stack_small(ab, ft_strequ(argv[1], "-v"));
+	else if (*ab[2] < 6)
+		sort_stack_medium(ab, ft_strequ(argv[1], "-v"));
+	else
+		sort_stack_groups(ab, ft_strequ(argv[1], "-v"));
 	return (0);
 }
 
-//make function that puts stack b in a position that is ready for pushing.
-//checker function occasionally fails even when solution is correct
-//checker prints ERROR, not KO when this happens...
+//implement sort_stack_medium for 4 and 5 numbers.

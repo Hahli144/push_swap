@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/15 18:51:40 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/16 17:03:12 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,30 +211,33 @@ int	check_input(char *input)
 	return (0);
 }
 
-void	handle_operation(int **ab, char *input)
+int	handle_operation(int **ab, char *input)
 {
 	if (ft_strequ(input, "sa"))
 		handle_sa(&ab);
-	if (ft_strequ(input, "sb"))
+	else if (ft_strequ(input, "sb"))
 		handle_sb(&ab);
-	if (ft_strequ(input, "ss"))
+	else if (ft_strequ(input, "ss"))
 		handle_ss(&ab);
-	if (ft_strequ(input, "pa"))
+	else if (ft_strequ(input, "pa"))
 		handle_pa(&ab);
-	if (ft_strequ(input, "pb"))
+	else if (ft_strequ(input, "pb"))
 		handle_pb(&ab);
-	if (ft_strequ(input, "ra"))
+	else if (ft_strequ(input, "ra"))
 		handle_ra(&ab);
-	if (ft_strequ(input, "rb"))
+	else if (ft_strequ(input, "rb"))
 		handle_rb(&ab);
-	if (ft_strequ(input, "rr"))
+	else if (ft_strequ(input, "rr"))
 		handle_rr(&ab);
-	if (ft_strequ(input, "rra"))
+	else if (ft_strequ(input, "rra"))
 		handle_rra(&ab);
-	if (ft_strequ(input, "rrb"))
+	else if (ft_strequ(input, "rrb"))
 		handle_rrb(&ab);
-	if (ft_strequ(input, "rrr"))
+	else if (ft_strequ(input, "rrr"))
 		handle_rrr(&ab);
+	else
+		return (0);
+	return (1);
 }
 
 void	debug_print(int **ab)
@@ -258,9 +261,8 @@ void	debug_print(int **ab)
 
 int	handle_input(int **ab, char *input, int debug_mode)
 {
-	if (!check_input(input))
+	if (!handle_operation(ab, input))
 		return (1);
-	handle_operation(ab, input);
 	if (debug_mode)
 		debug_print(ab);
 	return (0);
@@ -276,6 +278,7 @@ int	handle_sorting(int **ab, int debug_mode)
 			break ;
 		if (handle_input(ab, input, debug_mode))
 			return (0);
+		//free(input);
 	}
 	return (1);
 }

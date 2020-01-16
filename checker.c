@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/15 18:48:24 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/16 17:04:07 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	main(int argc, char **argv)
 			write(1, "KO\n", 3);
 	}
 	else
-		write(2, "Weird Error\n", 12);
+		write(2, "Error\n", 6);
 	return (0);
 }
