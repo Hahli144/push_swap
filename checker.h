@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/16 16:31:17 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/16 19:48:09 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		check_error(int argc, char **argv);
 int		create_stacks(int argc, char **argv, int **ab);
 
 int		check_order(int **ab);
+
+int		check_order_stack(int **ab, int stack);
 
 int		check_input(char *input);
 

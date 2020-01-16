@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/16 19:30:54 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/16 20:00:23 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,7 @@ void	sort_stack_small(int **ab, int debug_mode)
 		if (debug_mode)
 			debug_print_wait(ab);
 	}
-	if (!check_order(ab))
+	if (!check_order_stack(ab, 0))
 	{
 		operation_print(ab, "sa");
 		if (debug_mode)
@@ -289,6 +289,29 @@ void	sort_stack_medium(int **ab, int debug_mode)
 		return ;
 	if (debug_mode)
 		debug_print_wait(ab);
+	biggest_to_top(ab, 0);
+	if (debug_mode)
+		debug_print_wait(ab);
+	operation_print(ab, "pb");
+	if (debug_mode)
+		debug_print_wait(ab);
+	smallest_to_top(ab, 0);
+	if (debug_mode)
+		debug_print_wait(ab);
+	operation_print(ab, "pb");
+	if (debug_mode)
+		debug_print_wait(ab);
+	sort_stack_small(ab, debug_mode);
+	operation_print(ab, "pa");
+	if (debug_mode)
+		debug_print_wait(ab);
+	operation_print(ab, "pa");
+	if (debug_mode)
+		debug_print_wait(ab);
+	operation_print(ab, "ra");
+	if (debug_mode)
+		debug_print_wait(ab);
+/*
 	while (*ab[2] > 3)
 	{
 		operation_print(ab, "pb");
@@ -324,6 +347,7 @@ void	sort_stack_medium(int **ab, int debug_mode)
 		if (debug_mode)
 			debug_print_wait(ab);
 	}
+*/
 	//if (ab[1][0] < ab[1][1]
 }
 
@@ -393,3 +417,4 @@ int	main(int argc, char **argv)
 }
 
 //implement sort_stack_medium for 4 and 5 numbers.
+//Test everything thoroughly, 1, 2, 3, 4, 5, 6, 100, 500 numbers 
