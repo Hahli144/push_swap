@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/16 19:47:33 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/17 16:52:44 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft/get_next_line.h"
 #include "checker.h"
 
-int	check_if_digits(char *str)
+int		check_if_digits(char *str)
 {
 	int i;
 
@@ -40,7 +40,7 @@ int	check_if_digits(char *str)
 	return (1);
 }
 
-int	check_string_ints(char *str)
+int		check_string_ints(char *str)
 {
 	int i;
 
@@ -62,7 +62,7 @@ int	check_string_ints(char *str)
 	return (1);
 }
 
-int	check_array_int(int argc, char **argv)
+int		check_array_int(int argc, char **argv)
 {
 	int i;
 
@@ -77,7 +77,7 @@ int	check_array_int(int argc, char **argv)
 	return (1);
 }
 
-int	check_duplicate(int **ab)
+int		check_duplicate(int **ab)
 {
 	int i;
 	int j;
@@ -94,13 +94,13 @@ int	check_duplicate(int **ab)
 	return (0);
 }
 
-int	handle_error(void)
+int		handle_error(void)
 {
 	write(2, "Error\n", 6);
 	return (1);
 }
 
-int	check_error(int argc, char **argv)
+int		check_error(int argc, char **argv)
 {
 	if (argc < 2)
 		return (1);
@@ -109,7 +109,7 @@ int	check_error(int argc, char **argv)
 	return (0);
 }
 
-int	count_arguments(int argc, char **argv)
+int		count_arguments(int argc, char **argv)
 {
 	int i;
 	int j;
@@ -165,7 +165,7 @@ void	store_string_ints(int argc, char **argv, int **ab)
 	}
 }
 
-int	create_stacks(int argc, char **argv, int **ab)
+int		create_stacks(int argc, char **argv, int **ab)
 {
 	int i;
 	int size;
@@ -186,7 +186,7 @@ int	create_stacks(int argc, char **argv, int **ab)
 	return (0);
 }
 
-int	check_order(int **ab)
+int		check_order(int **ab)
 {
 	int i;
 
@@ -199,7 +199,7 @@ int	check_order(int **ab)
 	return (1);
 }
 
-int	check_order_stack(int **ab, int stack)
+int		check_order_stack(int **ab, int stack)
 {
 	int i;
 
@@ -210,7 +210,7 @@ int	check_order_stack(int **ab, int stack)
 	return (1);
 }
 
-int	check_input(char *input)
+int		check_input(char *input)
 {
 	if (ft_strequ(input, "sa") || ft_strequ(input, "sb") ||
 		ft_strequ(input, "ss") || ft_strequ(input, "pa") ||
@@ -222,7 +222,7 @@ int	check_input(char *input)
 	return (0);
 }
 
-int	handle_operation(int **ab, char *input)
+int		handle_operation(int **ab, char *input)
 {
 	if (ft_strequ(input, "sa"))
 		handle_sa(&ab);
@@ -270,7 +270,7 @@ void	debug_print(int **ab)
 	}
 }
 
-int	handle_input(int **ab, char *input, int debug_mode)
+int		handle_input(int **ab, char *input, int debug_mode)
 {
 	if (!handle_operation(ab, input))
 		return (1);
@@ -279,7 +279,7 @@ int	handle_input(int **ab, char *input, int debug_mode)
 	return (0);
 }
 
-int	handle_sorting(int **ab, int debug_mode)
+int		handle_sorting(int **ab, int debug_mode)
 {
 	char *input;
 
@@ -289,11 +289,7 @@ int	handle_sorting(int **ab, int debug_mode)
 			break ;
 		if (handle_input(ab, input, debug_mode))
 			return (0);
-		//free(input);
+		free(input);
 	}
 	return (1);
 }
-
-// create stacks from strings containing multiple integers
-// check if array is sorted in between moves
-// works perfectly with "-v" flag

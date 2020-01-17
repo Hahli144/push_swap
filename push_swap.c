@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/16 20:00:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/17 17:22:47 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 #include "libft/get_next_line.h"
 #include "checker.h"
 
-void	operation_print(int **ab, char *operation)
+void	operation_print(int **ab, char *operation, int debug_mode)
 {
 	handle_operation(ab, operation);
 	ft_printf("%s\n", operation);
+	if (debug_mode)
+		debug_print_wait(ab);
 }
 
-int	check_number_group(int n, int **ab, int group_amount)
+int		check_number_group(int n, int **ab, int group_amount)
 {
-	int i;
-	int j;
-	float divisor;
+	int		i;
+	int		j;
+	float	divisor;
 
 	i = 0;
 	j = 0;
@@ -46,43 +48,47 @@ int	check_number_group(int n, int **ab, int group_amount)
 	return (j / divisor);
 }
 
-void	group_number_to_top(int **ab, int group, int group_amount)
+int		find_first_group_number(int **ab, int group, int group_amount)
 {
 	int i;
-	int first;
-	int last;
 
 	i = -1;
 	while (*ab[2] > ++i)
 		if (check_number_group(ab[0][i], ab, group_amount) == group)
-		{
-			first = i;
-			break;
-		}
+			break ;
+	return (i);
+}
+
+int		find_last_group_number(int **ab, int group, int group_amount)
+{
+	int i;
+
 	i = *ab[2];
 	while (1)
 		if (check_number_group(ab[0][--i], ab, group_amount) == group)
-		{
-			last = i;
-			break;
-		}
-	//ft_printf("first: %d, last: %d, group: %d\n", first, last, group); //debug
+			break ;
+	return (i);
+}
+
+void	group_number_to_top(int **ab, int group, int group_amount)
+{
+	int first;
+	int last;
+
+	first = find_first_group_number(ab, group, group_amount);
+	last = find_last_group_number(ab, group, group_amount);
 	if (*ab[2] - last + 1 <= first)
 		while (++last <= *ab[2])
-		{
 			if (check_if_b_moves(ab) < 0)
-				operation_print(ab, "rrr");
+				operation_print(ab, "rrr", 0);
 			else
-				operation_print(ab, "rra");
-		}
+				operation_print(ab, "rra", 0);
 	else
 		while (first--)
-		{
 			if (check_if_b_moves(ab) > 0)
-				operation_print(ab, "rr");
+				operation_print(ab, "rr", 0);
 			else
-				operation_print(ab, "ra");
-		}
+				operation_print(ab, "ra", 0);
 }
 
 int		check_if_b_moves(int **ab)
@@ -121,15 +127,15 @@ void	smallest_to_top(int **ab, int stack)
 	if (smallest <= *ab[stack + 2] / 2)
 		while (smallest--)
 			if (stack == 0)
-				operation_print(ab, "ra");
+				operation_print(ab, "ra", 0);
 			else
-				operation_print(ab, "rb");
+				operation_print(ab, "rb", 0);
 	else
 		while (smallest++ < *ab[stack + 2])
 			if (stack == 0)
-				operation_print(ab, "rra");
+				operation_print(ab, "rra", 0);
 			else
-				operation_print(ab, "rrb");
+				operation_print(ab, "rrb", 0);
 }
 
 void	biggest_to_top(int **ab, int stack)
@@ -147,15 +153,15 @@ void	biggest_to_top(int **ab, int stack)
 	if (biggest <= *ab[stack + 2] / 2)
 		while (biggest--)
 			if (stack == 0)
-				operation_print(ab, "ra");
+				operation_print(ab, "ra", 0);
 			else
-				operation_print(ab, "rb");
+				operation_print(ab, "rb", 0);
 	else
 		while (biggest++ < *ab[stack + 2])
 			if (stack == 0)
-				operation_print(ab, "rra");
+				operation_print(ab, "rra", 0);
 			else
-				operation_print(ab, "rrb");
+				operation_print(ab, "rrb", 0);
 }
 
 void	index_to_top(int index, int **ab, int stack)
@@ -163,18 +169,18 @@ void	index_to_top(int index, int **ab, int stack)
 	if (index <= *ab[stack + 2] / 2)
 		while (index--)
 			if (stack == 0)
-				operation_print(ab, "ra");
+				operation_print(ab, "ra", 0);
 			else
-				operation_print(ab, "rb");
+				operation_print(ab, "rb", 0);
 	else
 		while (index++ < *ab[stack + 2])
 			if (stack == 0)
-				operation_print(ab, "rra");
+				operation_print(ab, "rra", 0);
 			else
-				operation_print(ab, "rrb");
+				operation_print(ab, "rrb", 0);
 }
 
-int	stack_contains_group(int **ab, int stack, int group, int group_amount)
+int		stack_contains_group(int **ab, int stack, int group, int group_amount)
 {
 	int i;
 
@@ -190,7 +196,7 @@ int	stack_contains_group(int **ab, int stack, int group, int group_amount)
 	return (0);
 }
 
-int	smaller_than_stack(int n, int **ab, int stack)
+int		smaller_than_stack(int n, int **ab, int stack)
 {
 	int i;
 
@@ -201,7 +207,7 @@ int	smaller_than_stack(int n, int **ab, int stack)
 	return (1);
 }
 
-int	bigger_than_stack(int n, int **ab, int stack)
+int		bigger_than_stack(int n, int **ab, int stack)
 {
 	int i;
 
@@ -212,7 +218,7 @@ int	bigger_than_stack(int n, int **ab, int stack)
 	return (1);
 }
 
-int	smallest_bigger_than(int n, int **ab, int stack)
+int		smallest_bigger_than(int n, int **ab, int stack)
 {
 	int i;
 	int smallest;
@@ -230,7 +236,6 @@ int	smallest_bigger_than(int n, int **ab, int stack)
 void	rotate_stack_b(int **ab)
 {
 	int i;
-	//int index;
 
 	i = 0;
 	if (smaller_than_stack(ab[0][0], ab, 1)
@@ -239,8 +244,6 @@ void	rotate_stack_b(int **ab)
 		biggest_to_top(ab, 1);
 		return ;
 	}
-	//index = smallest_bigger_than(ab[0][0], ab, 1);
-	//index_to_top(index, ab, 1);
 }
 
 void	debug_print_wait(int **ab)
@@ -261,23 +264,11 @@ void	sort_stack_small(int **ab, int debug_mode)
 	while (!bigger_than_stack(ab[0][i], ab, 0))
 		i++;
 	if (i == 0)
-	{
-		operation_print(ab, "ra");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
+		operation_print(ab, "ra", debug_mode);
 	if (i == 1)
-	{
-		operation_print(ab, "rra");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
+		operation_print(ab, "rra", debug_mode);
 	if (!check_order_stack(ab, 0))
-	{
-		operation_print(ab, "sa");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
+		operation_print(ab, "sa", debug_mode);
 }
 
 void	sort_stack_medium(int **ab, int debug_mode)
@@ -292,63 +283,23 @@ void	sort_stack_medium(int **ab, int debug_mode)
 	biggest_to_top(ab, 0);
 	if (debug_mode)
 		debug_print_wait(ab);
-	operation_print(ab, "pb");
-	if (debug_mode)
-		debug_print_wait(ab);
+	operation_print(ab, "pb", debug_mode);
 	smallest_to_top(ab, 0);
 	if (debug_mode)
 		debug_print_wait(ab);
-	operation_print(ab, "pb");
-	if (debug_mode)
-		debug_print_wait(ab);
+	operation_print(ab, "pb", debug_mode);
 	sort_stack_small(ab, debug_mode);
-	operation_print(ab, "pa");
-	if (debug_mode)
-		debug_print_wait(ab);
-	operation_print(ab, "pa");
-	if (debug_mode)
-		debug_print_wait(ab);
-	operation_print(ab, "ra");
-	if (debug_mode)
-		debug_print_wait(ab);
-/*
-	while (*ab[2] > 3)
-	{
-		operation_print(ab, "pb");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
-	while (!bigger_than_stack(ab[0][i], ab, 0))
-		i++;
-	if (i == 0)
-	{
-		operation_print(ab, "ra");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
-	if (i == 1)
-	{
-		operation_print(ab, "rra");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
-	if (!check_order(ab))
-	{
-		operation_print(ab, "sa");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
-	if (*ab[3] == 1)
-	{
-		operation_print(ab, "pa");
-		if (debug_mode)
-			debug_print_wait(ab);
-		operation_print(ab, "ra");
-		if (debug_mode)
-			debug_print_wait(ab);
-	}
-*/
-	//if (ab[1][0] < ab[1][1]
+	operation_print(ab, "pa", debug_mode);
+	operation_print(ab, "pa", debug_mode);
+	operation_print(ab, "ra", debug_mode);
+}
+
+int		count_group_amount(int **ab)
+{
+	if (*ab[2] < 300)
+		return (5);
+	else
+		return (11);
 }
 
 void	sort_stack_groups(int **ab, int debug_mode)
@@ -356,14 +307,10 @@ void	sort_stack_groups(int **ab, int debug_mode)
 	int group;
 	int group_amount;
 
-	if (*ab[2] < 300)
-		group_amount = 5;
-	else
-		group_amount = 11;
 	if (check_order(ab))
 		return ;
-	//ft_putnbr(check_number_group(ab[0][0], ab, 5));
 	group = 0;
+	group_amount = count_group_amount(ab);
 	if (debug_mode)
 		debug_print_wait(ab);
 	while (*ab[2])
@@ -371,31 +318,19 @@ void	sort_stack_groups(int **ab, int debug_mode)
 		while (stack_contains_group(ab, 0, group, group_amount))
 		{
 			group_number_to_top(ab, group, group_amount);
-			//ft_putnbr(check_if_b_moves(ab));
-			//if (stack_contains_group(ab, 1, group, 5))
-				rotate_stack_b(ab);
-			//else
-				//smallest_to_top(ab, 1);
-			//ft_printf("%d\n", ab[0][0]); // debug
-			operation_print(ab, "pb");
-			//if (ab[1][0] < ab[1][1])
-				//operation_print(ab, "sb");
-			if (debug_mode)
-				debug_print_wait(ab);
+			rotate_stack_b(ab);
+			operation_print(ab, "pb", debug_mode);
 		}
 		group++;
 	}
 	while (*ab[3])
 	{
 		biggest_to_top(ab, 1);
-		operation_print(ab, "pa");
-		if (debug_mode)
-			debug_print_wait(ab);
+		operation_print(ab, "pa", debug_mode);
 	}
-	//debug_print(ab); //debug
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int *ab[4];
 
@@ -415,6 +350,3 @@ int	main(int argc, char **argv)
 		sort_stack_groups(ab, ft_strequ(argv[1], "-v"));
 	return (0);
 }
-
-//implement sort_stack_medium for 4 and 5 numbers.
-//Test everything thoroughly, 1, 2, 3, 4, 5, 6, 100, 500 numbers 
