@@ -42,27 +42,6 @@ int		check_number_group(int n, int **ab, int group_amount)
 	return (j / divisor);
 }
 
-int		find_first_group_number(int **ab, int group, int group_amount)
-{
-	int i;
-
-	i = -1;
-	while (*ab[2] > ++i)
-		if (check_number_group(ab[0][i], ab, group_amount) == group)
-			break ;
-	return (i);
-}
-
-int		find_last_group_number(int **ab, int group, int group_amount)
-{
-	int i;
-
-	i = *ab[2];
-	while (1)
-		if (check_number_group(ab[0][--i], ab, group_amount) == group)
-			break ;
-	return (i);
-}
 
 void	group_number_to_top(int **ab, int group, int group_amount)
 {
@@ -212,20 +191,6 @@ int		bigger_than_stack(int n, int **ab, int stack)
 	return (1);
 }
 
-int		smallest_bigger_than(int n, int **ab, int stack)
-{
-	int i;
-	int smallest;
-
-	i = 0;
-	smallest = ab[stack][0];
-	while (*ab[stack + 2] > ++i)
-	{
-		if (ab[stack][i] < smallest && ab[stack][i] > n)
-			smallest = ab[stack][i];
-	}
-	return (smallest);
-}
 
 void	rotate_stack_b(int **ab)
 {
