@@ -3,10 +3,10 @@
 The aim of this project was to sort data on a stack, with a limited set of instructions, with as few moves as possible.
 To make this happen, several different algorithms needed to be tested to choose the most appropriate solutions for optimal sorting.
 
-With <= 3 digits, amount of moves is <= 2.  
-With <= 5 digits, amount of moves is <= 11  
-With <= 100 digits, amount of moves is < 900, average around ~750.  
-With <= 500 digits, amount of moves is < 8000, average around ~7300.  
+**With <= 3 digits**, amount of moves is <= 2.  
+**With <= 5 digits**, amount of moves is <= 11  
+**With <= 100 digits**, amount of moves is < 900, average around ~750.  
+**With <= 500 digits**, amount of moves is < 8000, average around ~7300.  
 # Checker
   ```
 ./checker [-v] [args ...]
