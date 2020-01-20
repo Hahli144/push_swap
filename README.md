@@ -3,16 +3,7 @@
 The aim of this project was to sort data on a stack, with a limited set of instructions, with as few moves as possible.
 To make this happen, several different algorithms needed to be tested to choose the most appropriate solutions for optimal sorting.
 
-## How to use:
-Compile the project
-
-  ```
-make
-  ```
-  
-The result is two binary files, checker and push_swap.
-
-### Checker
+## Checker
   ```
 ./checker [-v] [args ...]
   ``` 
@@ -46,7 +37,7 @@ rrr - rra and rrb at the same time
 ```
 Anything else will result in an error, stopping the program.
 
-### Push_swap
+## Push_swap
   ```
 ./push_swap [-v] [args ...]
   ``` 
