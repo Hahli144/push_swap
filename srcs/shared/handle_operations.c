@@ -6,13 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 15:28:08 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/10 16:38:21 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:43:01 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libft/ft_printf.h"
-#include "libft/get_next_line.h"
+#include "../../includes/checker.h"
 
 void	handle_sa(int ***ab)
 {

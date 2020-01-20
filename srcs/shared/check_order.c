@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   check_order.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/20 14:45:19 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:43:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker.h"
 
-int		main(int argc, char **argv)
+int		check_order(int **ab)
 {
-	int *ab[4];
+	int i;
 
-	if (argc == 1 || (argc == 2 && ft_strequ(argv[1], "-v")))
+	i = 0;
+	if (*ab[3])
 		return (0);
-	if (check_error(argc, argv))
-		return (handle_error());
-	if (create_stacks(argc, argv, ab))
-		return (1);
-	if (check_duplicate(ab))
-		return (handle_error());
-	if (*ab[2] < 4)
-		sort_stack_small(ab, ft_strequ(argv[1], "-v"));
-	else if (*ab[2] < 6)
-		sort_stack_medium(ab, ft_strequ(argv[1], "-v"));
-	else
-		sort_stack_groups(ab, ft_strequ(argv[1], "-v"));
-	return (0);
+	while (*ab[2] > ++i)
+		if (ab[0][i - 1] > ab[0][i])
+			return (0);
+	return (1);
+}
+
+int		check_order_stack(int **ab, int stack)
+{
+	int i;
+
+	i = 0;
+	while (*ab[stack + 2] > ++i)
+		if (ab[stack][i - 1] > ab[stack][i])
+			return (0);
+	return (1);
 }

@@ -6,12 +6,16 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/17 17:53:48 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:45:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 # define CHECKER_H
+
+#include "../libft/libft.h"
+#include "../libft/ft_printf.h"
+#include "../libft/get_next_line.h"
 
 void	handle_sa(int ***ab);
 

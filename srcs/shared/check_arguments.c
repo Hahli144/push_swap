@@ -6,14 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/17 16:52:44 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:43:27 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libft/ft_printf.h"
-#include "libft/get_next_line.h"
-#include "checker.h"
+#include "../../includes/checker.h"
 
 int		check_if_digits(char *str)
 {

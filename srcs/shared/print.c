@@ -6,14 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:58:18 by sadawi            #+#    #+#             */
-/*   Updated: 2020/01/17 17:22:47 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/01/20 14:44:08 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libft/ft_printf.h"
-#include "libft/get_next_line.h"
-#include "checker.h"
+#include "../../includes/checker.h"
 
 void	operation_print(int **ab, char *operation, int debug_mode)
 {
