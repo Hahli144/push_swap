@@ -15,13 +15,7 @@
 #include "libft/get_next_line.h"
 #include "checker.h"
 
-void	operation_print(int **ab, char *operation, int debug_mode)
-{
-	handle_operation(ab, operation);
-	ft_printf("%s\n", operation);
-	if (debug_mode)
-		debug_print_wait(ab);
-}
+
 
 int		check_number_group(int n, int **ab, int group_amount)
 {
@@ -246,11 +240,6 @@ void	rotate_stack_b(int **ab)
 	}
 }
 
-void	debug_print_wait(int **ab)
-{
-	debug_print(ab);
-	read(0, NULL, 1);
-}
 
 int		count_group_amount(int **ab)
 {
