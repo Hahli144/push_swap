@@ -42,3 +42,26 @@ The optional ```-v``` flag enables debug mode, which allows the process to be ex
 ## How does it work?
 
 Different methods were used depending on the amount of arguments.
+
+## 3 arguments or less
+1. The largest integer is found, and rotated to the bottom of the stack.  
+  This can always be done with a single move, either ```ra``` or ```rra```. The largest digit is now sorted. 
+2. The digits above are either in the correct place, or need to be swapped with ```sa```.
+
+The stack is now sorted.
+
+## 5 arguments or less
+1. The largest integer is found, rotated to the top with either ```ra``` or ```rra```, then pushed to stack b.
+2. The smallest integer is found, rotated to the top with either ```ra``` or ```rra```, then pushed to stack b.
+3. Stack a is sorted with the "3 arguments or less" algorithm.
+4. Both digits are pushed from stack b to stack a.
+5. Stack a is rotated once with ```ra``` to push the largest integer to the bottom.
+
+The stack is now sorted.
+
+## 100 arguments or less
+
+1. Integers are divided into 5 groups by size.  
+  Group 1 containing the smallest integers and group 5 containing the largest integers.
+2. Integers from the first group are pushed into stack b.
+    d
