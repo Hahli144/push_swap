@@ -5,7 +5,7 @@ To make this happen, several different algorithms needed to be tested to choose 
 
 With <= 3 digits, amount of moves is <= 2.  
 With <= 5 digits, amount of moves is <= 11  
-With <= 100 digits, amount of moves < 900, average around ~750.  
+With <= 100 digits, amount of moves is < 900, average around ~750.  
 With <= 500 digits, amount of moves is < 8000, average around ~7300.  
 # Checker
   ```
@@ -51,11 +51,11 @@ Different methods were used depending on the amount of arguments.
 The stack is now sorted.
 
 ## 5 arguments or less
-1. The largest integer is found, rotated to the top with either ```ra``` or ```rra```, then pushed to stack b.
-2. The smallest integer is found, rotated to the top with either ```ra``` or ```rra```, then pushed to stack b.
-3. Stack a is sorted with the "3 arguments or less" algorithm.
-4. Both digits are pushed from stack b to stack a.
-5. Stack a is rotated once with ```ra``` to push the largest integer to the bottom.
+1. The largest integer is found, rotated to the top with either ```ra``` or ```rra```, then pushed to stack B.
+2. The smallest integer is found, rotated to the top with either ```ra``` or ```rra```, then pushed to stack B.
+3. Stack A is sorted with the "3 arguments or less" algorithm.
+4. Both digits are pushed from stack B to stack A.
+5. Stack A is rotated once with ```ra``` to push the largest integer to the bottom.
 
 The stack is now sorted.
 
@@ -63,5 +63,16 @@ The stack is now sorted.
 
 1. Integers are divided into 5 groups by size.  
   Group 1 containing the smallest integers and group 5 containing the largest integers.
-2. Integers from the first group are pushed into stack b.
-    d
+2. An integer from the first group is rotated to the top of stack A.
+  The integer requiring the fewest moves to rotate to the top is chosen.
+2.5 If stack B does not have it's largest number on top, it will be rotated simultaneously with stack A.  
+  This saves several moves throughout the sorting.
+3. Stack B is rotated to push the largest integer to the top.
+4. The integer on top of stack A is pushed to stack B.
+5. Steps 2-4 are repeated until all numbers from the group are in stack B.
+6. The next group is chosen, and steps 2-5 are repeated until all groups are in stack B.
+  Stack A will now be empty, stack B will contain all integers divided into groups.
+7. All integers are pushed back to stack A from largest to smallest.  
+  Stack B will be rotated when needed to find the largest number.
+
+The stack is now sorted.
