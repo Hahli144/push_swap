@@ -75,8 +75,8 @@ The stack is now sorted.
 The stack is now sorted.
 
 ## 500+ integers
-The algorithm for 500 integers or more is the same as "100 integers or less", except the amount of groups is increased to 11.
+The algorithm for 500 integers or more is the same as **"100 integers or less"**, except the amount of groups is increased to 11.
 
 # Things to improve
-"5 integers or less" algorithm is simple but not optimal.  
-"500+ integers" algorithm could increase group size when integer amount is significantly over 500 for better optimization.
+**"5 integers or less"** algorithm is simple but not optimal.  
+**"500+ integers"** algorithm could increase group size when integer amount is significantly over 500 for better optimization.
