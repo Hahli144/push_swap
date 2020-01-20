@@ -39,11 +39,11 @@ Push_swap takes integers as arguments. On execution, push_swap will sort the giv
 
 The optional ```-v``` flag enables debug mode, which allows the process to be examined step by step. Push_swap will pause after each stack move, and continue step by step when any input is read.
 
-## How does it work?
+# How does it work?
 
 Different methods were used depending on the amount of arguments.
 
-## 3 arguments or less
+## 3 arguments or less 
 1. The largest integer is found, and rotated to the bottom of the stack.  
   This can always be done with a single move, either ```ra``` or ```rra```. The largest digit is now sorted. 
 2. The digits above are either in the correct place, or need to be swapped with ```sa```.
