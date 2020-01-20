@@ -63,7 +63,7 @@ The stack is now sorted.
 **1. Integers are divided into 5 groups by size.**  
   &nbsp;&nbsp;&nbsp;&nbsp;Group 1 containing the smallest integers and group 5 containing the largest integers.  
 **2. An integer from the first group is rotated to the top of stack A.**  
-  &nbsp;&nbsp;&nbsp;&nbsp;The integer requiring the fewest moves to rotate to the top is chosen. If stack B does not have it's largest number on top, it will be rotated simultaneously with stack A. This saves several moves throughout the sorting.  
+  &nbsp;&nbsp;&nbsp;&nbsp;The integer requiring the fewest moves to rotate to the top is chosen. If stack B does not have it's largest number on &nbsp;&nbsp;&nbsp;&nbsp;top, it will be rotated simultaneously with stack A. This saves several moves throughout the sorting.  
 **3. Stack B is rotated to push the largest integer to the top.**  
 **4. The integer on top of stack A is pushed to stack B.**  
 **5. Steps 2-4 are repeated until all numbers from the group are in stack B.**  
