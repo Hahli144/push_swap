@@ -251,24 +251,7 @@ int		handle_operation(int **ab, char *input)
 	return (1);
 }
 
-void	debug_print(int **ab)
-{
-	int i;
 
-	i = 0;
-	ft_printf("%sStack a:    %sStack b:\n", "\x1B[31m", "\x1B[32m");
-	while (*ab[2] > i || *ab[3] > i)
-	{
-		if (*ab[2] > i)
-			ft_printf("%s%-8d  ", "\x1B[31m", ab[0][i]);
-		else
-			ft_printf("          ");
-		if (*ab[3] > i)
-			ft_printf("%s  %d", "\x1B[32m", ab[1][i]);
-		ft_putendl("");
-		i++;
-	}
-}
 
 int		handle_input(int **ab, char *input, int debug_mode)
 {
