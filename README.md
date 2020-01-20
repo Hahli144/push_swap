@@ -16,11 +16,11 @@ The result is two binary files, checker and push_swap.
   ```
 ./checker [-v] [args ...]
   ``` 
-Checker takes integers as an argument.
+Checker takes integers as arguments. On execution, checker will wait for instructions on the standard input. When reading is stopped, checker will print "OK" if the instructions result in a sorted array, and "KO" if not.
 
 The optional ```-v``` flag enables debug mode, which prints both stacks after each operation.
 
-On execution, checker will wait for instructions on the standard input. Valid instructions are:
+ Valid instructions for checker are:
 ```
 sa - swap the first 2 elements at the top of stack a
 
@@ -44,3 +44,12 @@ rrb - shift down all elements of stack b by 1
 
 rrr - rra and rrb at the same time
 ```
+Anything else will result in an error, stopping the program.
+
+### Push_swap
+  ```
+./push_swap [-v] [args ...]
+  ``` 
+Push_swap takes integers as arguments. On execution, push_swap will sort the given integers into ascending order, using valid moves, and print each move on the standard output.
+
+The optional ```-v``` flag enables debug mode, which allows the process to be examined step by step. Push_swap will pause after each stack move, and continue step by step when any input is read.
