@@ -60,7 +60,6 @@ The stack is now sorted.
 The stack is now sorted.
 
 ## 100 arguments or less
-
 1. Integers are divided into 5 groups by size.  
   Group 1 containing the smallest integers and group 5 containing the largest integers.  
 2. An integer from the first group is rotated to the top of stack A.  
@@ -74,3 +73,6 @@ The stack is now sorted.
   Stack B will be rotated when needed to find the largest number.
 
 The stack is now sorted.
+
+## 500+ arguments
+The algorithm for 500 integers or more is the same as "100 arguments or less", except the amount of groups is increased to 11.
