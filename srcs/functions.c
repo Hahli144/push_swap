@@ -94,20 +94,7 @@ int		check_duplicate(int **ab)
 	return (0);
 }
 
-int		handle_error(void)
-{
-	write(2, "Error\n", 6);
-	return (1);
-}
 
-int		check_error(int argc, char **argv)
-{
-	if (argc < 2)
-		return (1);
-	if (!check_array_int(argc, argv))
-		return (1);
-	return (0);
-}
 
 int		count_arguments(int argc, char **argv)
 {
