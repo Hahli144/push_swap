@@ -77,6 +77,6 @@ The stack is now sorted.
 ## 500+ arguments
 The algorithm for 500 integers or more is the same as "100 arguments or less", except the amount of groups is increased to 11.
 
-### Things to improve
-"5 arguments or less" algorithm is simple but not optimal.
+# Things to improve
+"5 arguments or less" algorithm is simple but not optimal.  
 "500+ arguments" algorithm could increase group size when argument amount is significantly over 500 for better optimization.
