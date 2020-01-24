@@ -15,7 +15,9 @@ NAME2=push_swap
 SRCS_CHECKER=srcs/checker/checker.c
 SRCS_SHARED= srcs/shared/check_arguments.c srcs/shared/check_order.c \
 srcs/shared/create_stacks.c srcs/shared/handle_error.c srcs/shared/print.c \
-srcs/shared/handle_input.c srcs/shared/handle_operations.c
+srcs/shared/handle_input.c srcs/shared/handle_push_operations.c \
+srcs/shared/handle_shift_down_operations.c \
+srcs/shared/handle_shift_up_operations.c srcs/shared/handle_swap_operations.c
 SRCS_PUSH_SWAP=srcs/push_swap/push_swap.c srcs/push_swap/b_stack_lookahead.c \
 srcs/push_swap/check_group.c srcs/push_swap/sort_stack.c \
 srcs/push_swap/find_number.c srcs/push_swap/move_number.c \
