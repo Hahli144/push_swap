@@ -60,6 +60,7 @@ int		count_arguments(int argc, char **argv)
 	}
 	return (total);
 }
+
 void	store_string_ints(int argc, char **argv, int **ab)
 {
 	int i;
