@@ -13,9 +13,9 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-#include "../libft/libft.h"
-#include "../libft/ft_printf.h"
-#include "../libft/get_next_line.h"
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
+# include "../libft/get_next_line.h"
 
 void	handle_sa(int ***ab);
 
